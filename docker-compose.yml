@@ -29,6 +29,9 @@ services:
         port: 5000
         partition: 0
         name: leila
+    hostname: leila
+    ports:
+      - "5000:5000"
     networks:
       - backend
   quentin:
@@ -37,8 +40,11 @@ services:
       dockerfile: Dockerfile
       args:
         port: 5001
-        partition: 0
+        partition: 1
         name: quentin
+    hostname: quentin
+    ports:
+      - "5001:5001"
     networks:
       - backend
   rayna:
@@ -49,6 +55,9 @@ services:
         port: 5002
         partition: 2
         name: rayna
+    hostname: rayna
+    ports:
+      - "5002:5002"
     networks:
       - backend
 networks:

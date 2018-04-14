@@ -9,7 +9,7 @@ from uuid import uuid4
 
 from flask import Flask, jsonify, request
 
-TEST_KAFKA_BROKER = 'localhost:9092'
+TEST_KAFKA_BROKER = 'kafka:9092'
 TX_GROUP = b'tx_group'
 TX_TOPIC = b'transactions'
 BLOCKCHAIN_TOPIC = b'blockchain'
