@@ -7,8 +7,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
+ARG port
 ARG partition
-ARG mode
 ARG name
 
-CMD [ "python", "./kafka_blockchain.py", $partition, $mode, $name]
+CMD [ "python", "./kafka_blockchain.py", $port, $partition, $name]

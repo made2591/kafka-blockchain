@@ -26,8 +26,8 @@ services:
       context: ./nodes
       dockerfile: Dockerfile
       args:
+        port: 5000
         partition: 0
-        mode: miner
         name: leila
     networks:
       - backend
@@ -36,29 +36,9 @@ services:
       context: ./nodes
       dockerfile: Dockerfile
       args:
+        port: 5001
         partition: 0
-        mode: miner
         name: quentin
-    networks:
-      - backend
-  tressie:
-    build:
-      context: ./nodes
-      dockerfile: Dockerfile
-      args:
-        partition: 0
-        mode: user
-        name: tressie
-    networks:
-      - backend
-  corey:
-    build:
-      context: ./nodes
-      dockerfile: Dockerfile
-      args:
-        partition: 1
-        mode: user
-        name: corey
     networks:
       - backend
   rayna:
@@ -66,8 +46,8 @@ services:
       context: ./nodes
       dockerfile: Dockerfile
       args:
+        port: 5002
         partition: 2
-        mode: user
         name: rayna
     networks:
       - backend
