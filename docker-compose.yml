@@ -1,0 +1,75 @@
+version: "3"
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+    networks:
+      - backend
+  kafka:
+    image: wurstmeister/kafka:0.9.0.1
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    environment:
+      - KAFKA_ADVERTISED_PORT=9092
+      - KAFKA_BROKER_ID=1
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper
+      - KAFKA_ADVERTISED_HOST_NAME=kafka
+      - ZOOKEEPER_CONNECTION_TIMEOUT_MS=180000
+      - KAFKA_CREATE_TOPICS=transactions:3:1,blockchain:1:1,nodes:1:1
+    networks:
+      - backend
+  leila:
+    build:
+      context: ./nodes
+      dockerfile: Dockerfile
+      args:
+        partition: 0
+        mode: miner
+        name: leila
+    networks:
+      - backend
+  quentin:
+    build:
+      context: ./nodes
+      dockerfile: Dockerfile
+      args:
+        partition: 0
+        mode: miner
+        name: quentin
+    networks:
+      - backend
+  tressie:
+    build:
+      context: ./nodes
+      dockerfile: Dockerfile
+      args:
+        partition: 0
+        mode: user
+        name: tressie
+    networks:
+      - backend
+  corey:
+    build:
+      context: ./nodes
+      dockerfile: Dockerfile
+      args:
+        partition: 1
+        mode: user
+        name: corey
+    networks:
+      - backend
+  rayna:
+    build:
+      context: ./nodes
+      dockerfile: Dockerfile
+      args:
+        partition: 2
+        mode: user
+        name: rayna
+    networks:
+      - backend
+networks:
+  backend:
